@@ -125,6 +125,31 @@ def _content_to_gemini_parts(content: Any, tool_id_map: dict[str, str]) -> list:
     return parts
 
 
+# JSON Schema fields that Gemini's function declarations do not support
+_UNSUPPORTED_SCHEMA_KEYS = {
+    "$schema", "$defs", "$ref", "$id", "$comment",
+    "additionalProperties", "unevaluatedProperties",
+    "if", "then", "else", "not", "allOf", "anyOf", "oneOf",
+    "default", "examples", "const",
+    "contentEncoding", "contentMediaType",
+    "exclusiveMinimum", "exclusiveMaximum",
+    "patternProperties", "dependencies", "dependentSchemas",
+}
+
+
+def _clean_schema(schema: Any) -> Any:
+    """Recursively remove JSON Schema fields unsupported by Gemini."""
+    if isinstance(schema, dict):
+        return {
+            k: _clean_schema(v)
+            for k, v in schema.items()
+            if k not in _UNSUPPORTED_SCHEMA_KEYS
+        }
+    if isinstance(schema, list):
+        return [_clean_schema(item) for item in schema]
+    return schema
+
+
 def _tools_to_gemini(tools: list) -> list:
     """Convert Anthropic tool definitions to Gemini functionDeclarations."""
     decls = []
@@ -143,8 +168,7 @@ def _tools_to_gemini(tools: list) -> list:
         }
         schema = tool.get("input_schema")
         if schema:
-            schema = {k: v for k, v in schema.items() if k != "$schema"}
-            decl["parameters"] = schema
+            decl["parameters"] = _clean_schema(schema)
 
         decls.append(decl)
 
