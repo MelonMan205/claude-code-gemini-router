@@ -35,7 +35,7 @@ logger = logging.getLogger("gemini-router")
 
 GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "")
 PROXY_API_KEY: str = os.environ.get("PROXY_API_KEY", "")   # optional client auth
-PORT: int = int(os.environ.get("PORT", "9090"))
+PORT: int = int(os.environ.get("PORT", "4747"))
 GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta"
 
 # Models advertised to Claude Code via GET /v1/models

@@ -54,7 +54,7 @@ If you're mapping `https://ai.vseek.app/gemini` → `localhost:9090`, the tunnel
 |---|---|---|---|
 | `GEMINI_API_KEY` | Yes | — | Google AI Studio API key |
 | `PROXY_API_KEY` | No | (empty) | If set, clients must send this as `x-api-key` or `Authorization: Bearer <key>` |
-| `PORT` | No | `9090` | Port to listen on |
+| `PORT` | No | `4747` | Port to listen on |
 
 ## Supported models
 
