@@ -14,7 +14,7 @@ if [ -z "${GEMINI_API_KEY:-}" ]; then
   exit 1
 fi
 
-PORT="${PORT:-9090}"
+PORT="${PORT:-4747}"
 
 echo "Starting Claude Code Gemini Router on port $PORT"
 python -m uvicorn main:app --host 0.0.0.0 --port "$PORT" --log-level info

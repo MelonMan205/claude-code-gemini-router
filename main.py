@@ -13,6 +13,9 @@ Runs on port 9090.  Set with PORT env var if needed.
 import json
 import logging
 import os
+
+from dotenv import load_dotenv
+load_dotenv()
 import uuid
 from contextlib import asynccontextmanager
 
