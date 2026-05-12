@@ -129,11 +129,12 @@ def _content_to_gemini_parts(content: Any, tool_id_map: dict[str, str]) -> list:
 _UNSUPPORTED_SCHEMA_KEYS = {
     "$schema", "$defs", "$ref", "$id", "$comment",
     "additionalProperties", "unevaluatedProperties",
+    "propertyNames", "patternProperties",
     "if", "then", "else", "not", "allOf", "anyOf", "oneOf",
     "default", "examples", "const",
     "contentEncoding", "contentMediaType",
     "exclusiveMinimum", "exclusiveMaximum",
-    "patternProperties", "dependencies", "dependentSchemas",
+    "dependencies", "dependentSchemas", "dependentRequired",
 }
 
 
